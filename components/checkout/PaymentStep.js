@@ -36,6 +36,16 @@ export default function PaymentStep({ details, method, onMethodChange, onBack })
     paymentMethod: METHOD_LABELS[method] ?? undefined,
   });
 
+  function handleSendOrder() {
+    // Open the WhatsApp link FIRST, while `orderLink` still reflects
+    // the current cart — only clear the cart afterward. Doing both in
+    // one click via a plain <a onClick> race-conditions against
+    // React's re-render, which can clear the cart before the browser
+    // reads the link's destination, sending an empty order.
+    window.open(orderLink, "_blank", "noopener,noreferrer");
+    clearCart();
+  }
+
   return (
     <div className="grid md:grid-cols-3 gap-6">
       <div className="md:col-span-2 space-y-6">
@@ -106,15 +116,12 @@ export default function PaymentStep({ details, method, onMethodChange, onBack })
           title="Final Summary"
           note="Your order will be sent to us via WhatsApp for confirmation."
         />
-        
-         < a href={orderLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => clearCart()}
+        <button
+          onClick={handleSendOrder}
           className="block w-full text-center bg-[#25D366] text-white font-body font-medium py-3 rounded-full hover:opacity-90 transition-opacity"
         >
           Send Order via WhatsApp
-        </a>
+        </button>
         <button
           onClick={onBack}
           className="w-full py-3 rounded-full border border-lilac-soft text-ink font-body text-sm"

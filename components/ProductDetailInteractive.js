@@ -7,13 +7,10 @@ import QuantitySelector from "./QuantitySelector";
 
 export default function ProductDetailInteractive({ product }) {
   const [qty, setQty] = useState(1);
-  const [added, setAdded] = useState(false);
   const { addItem } = useCart();
 
   function handleAdd() {
     addItem(product, { qty, variant: product.shade ?? null });
-    setAdded(true);
-    setTimeout(() => setAdded(false), 2000);
   }
 
   return (
@@ -46,7 +43,7 @@ export default function ProductDetailInteractive({ product }) {
         onClick={handleAdd}
         className="w-full sm:w-auto px-8 py-3 rounded-full bg-lilac-deep text-white font-body font-medium hover:opacity-90 transition-opacity"
       >
-        {added ? "Added ✓" : "Add to Cart"}
+        Add to Cart
       </button>
     </div>
   );
