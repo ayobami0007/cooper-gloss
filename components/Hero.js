@@ -24,7 +24,7 @@ export default function Hero() {
         {/* Product image: desktop only */}
         <div className="relative hidden overflow-hidden md:block">
           <Image
-            src="/products/3in1SetChocoBarbie&ChocoGloss.jpeg"
+            src="/products/3in1-set-choco-barbie-choco-gloss.jpeg"
             alt="Cooper Gloss lip gloss set"
             fill
             sizes="50vw"
