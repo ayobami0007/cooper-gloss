@@ -31,7 +31,7 @@ const FAQ_SECTIONS = [
     items: [
       {
         q: "Where do you deliver, and how long does it take?",
-        a: "Please contact us on WhatsApp to confirm delivery locations, fees, and estimated delivery times.",
+        a: "Interstate delivery takes 48hrs to 72hrs while delivery within kwara state takes 24hrs -48hrs",
       },
     ],
   },
@@ -40,7 +40,7 @@ const FAQ_SECTIONS = [
     items: [
       {
         q: "What is your return policy?",
-        a: "Please contact us before placing an order if you have questions about returns or exchanges. Our policy will be confirmed by the business.",
+        a: "* Exchanges are allowed only if your order has not been dispatched. No returns once an order has been sent out. Please ensure you confirm your order before it is dispatched. ",
       },
     ],
   },
