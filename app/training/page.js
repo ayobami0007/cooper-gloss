@@ -1,7 +1,9 @@
 
 import Reveal from "@/components/ui/Reveal";
+import Link from "next/link";
 import { formatNaira } from "@/lib/constants";
 import { buildWhatsAppEnquiryLink } from "@/lib/whatsapp";
+
 
 const COURSES = [
   {
@@ -80,14 +82,12 @@ function CourseCard({ course }) {
         Class details coming soon
       </p>
 
-      <a
-        href={enquiryLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-auto inline-flex w-full items-center justify-center rounded-full bg-lilac-deep px-5 py-3 font-body text-sm font-medium text-white transition-colors hover:bg-lilac-deep/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lilac-deep focus-visible:ring-offset-2"
-      >
-        Enquire on WhatsApp
-      </a>
+    <Link
+  href={`/training/register?course=${course.id}`}
+  className="mt-auto inline-flex w-full items-center justify-center rounded-full bg-lilac-deep px-5 py-3 font-body text-sm font-medium text-white transition-colors hover:bg-lilac-deep/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lilac-deep focus-visible:ring-offset-2"
+>
+  Register Now
+</Link>
     </article>
   );
 }

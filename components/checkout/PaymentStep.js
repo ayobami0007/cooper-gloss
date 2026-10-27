@@ -7,12 +7,12 @@ import OrderSummary from "@/components/OrderSummary";
 import CopyButton from "@/components/CopyButton";
 
 const METHODS = [
-  {
-    id: "whatsapp",
-    label: "Order via WhatsApp",
-    description:
-      "Send your order details to us on WhatsApp. We'll confirm your order and send payment instructions.",
-  },
+  // {
+  //   id: "whatsapp",
+  //   label: "Order via WhatsApp",
+  //   description:
+  //     "Send your order details to us on WhatsApp. We'll confirm your order and send payment instructions.",
+  // },
   {
     id: "bank_transfer",
     label: "Bank Transfer",
@@ -22,7 +22,7 @@ const METHODS = [
 ];
 
 const METHOD_LABELS = {
-  whatsapp: "Order via WhatsApp",
+  // whatsapp: "Order via WhatsApp",
   bank_transfer: "Bank Transfer",
 };
 
@@ -37,11 +37,7 @@ export default function PaymentStep({ details, method, onMethodChange, onBack })
   });
 
   function handleSendOrder() {
-    // Open the WhatsApp link FIRST, while `orderLink` still reflects
-    // the current cart — only clear the cart afterward. Doing both in
-    // one click via a plain <a onClick> race-conditions against
-    // React's re-render, which can clear the cart before the browser
-    // reads the link's destination, sending an empty order.
+   
     window.open(orderLink, "_blank", "noopener,noreferrer");
     clearCart();
   }

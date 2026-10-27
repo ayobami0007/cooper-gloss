@@ -3,17 +3,18 @@
 
 import { useState } from "react";
 
+
 const FAQ_SECTIONS = [
   {
     title: "Ordering",
     items: [
       {
         q: "How do I place an order?",
-        a: 'Add products to your cart, then tap "Order via WhatsApp" to send your order details directly to us.',
+        a: "Browse our shop, add your preferred products to your cart, and proceed to checkout. Enter your details and select an available payment method. Your order summary will then open in WhatsApp for you to send to Cooper Gloss.",
       },
       {
-        q: "Can I order through WhatsApp directly?",
-        a: "Yes. You can send your order to us through WhatsApp using the cart on our website.",
+        q: "Can I place an order directly through WhatsApp?",
+        a: "We recommend placing your order through our website so you can select your products, review your quantities, and provide your order details correctly. You can contact us on WhatsApp if you need assistance.",
       },
     ],
   },
@@ -21,8 +22,12 @@ const FAQ_SECTIONS = [
     title: "Payment",
     items: [
       {
-        q: "How do I pay?",
-        a: "After sending your order on WhatsApp, we will confirm your order and provide payment instructions.",
+        q: "What payment methods are available?",
+        a: "Bank transfer is available. Follow the payment instructions provided during checkout. Other payment methods will be displayed on the website when they are available.",
+      },
+      {
+        q: "How do I confirm my bank transfer?",
+        a: "**How do I confirm my bank transfer?*After placing your order on our website, your order details will be sent to us through WhatsApp. Simply attach and send your bank-transfer receipt in the same chat so we can confirm your payment.",
       },
     ],
   },
@@ -31,7 +36,7 @@ const FAQ_SECTIONS = [
     items: [
       {
         q: "Where do you deliver, and how long does it take?",
-        a: "Interstate delivery takes 48hrs to 72hrs while delivery within kwara state takes 24hrs -48hrs",
+        a: "Interstate delivery takes 48–72 hours, while delivery within Kwara State takes 24–48 hours.",
       },
     ],
   },
@@ -40,7 +45,7 @@ const FAQ_SECTIONS = [
     items: [
       {
         q: "What is your return policy?",
-        a: "* Exchanges are allowed only if your order has not been dispatched. No returns once an order has been sent out. Please ensure you confirm your order before it is dispatched. ",
+        a: "Exchanges are allowed only if your order has not been dispatched. Returns are not accepted once an order has been sent out. Please ensure you confirm your order before dispatch.",
       },
     ],
   },
@@ -49,11 +54,16 @@ const FAQ_SECTIONS = [
     items: [
       {
         q: "How do I register for training?",
-        a: "Use the Enquire About Training button on the Training page to contact us on WhatsApp for registration details.",
+        a: "Choose your preferred training option on our Training page and follow the registration and payment steps provided on the website. Your training selection and details will be prepared for WhatsApp so you can send them to Cooper Gloss.",
+      },
+      {
+        q: "Do I need to purchase a starter kit?",
+        a: "Yes. You are required to purchase a starter kit for practical training sessions. Training also comes with supplier contacts to help you source your materials.",
       },
     ],
   },
 ];
+
 
 export default function FAQAccordion() {
   const [openItems, setOpenItems] = useState([]);
@@ -67,7 +77,7 @@ export default function FAQAccordion() {
   }
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-12 font-body text-ink sm:px-6 sm:py-16">
+    <main className="mx-auto max-w-5xl px-4 py-12 font-body text-ink sm:px-6 sm:py-16">
       <div className="mb-10 text-center">
         <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-ink/60">
           Need a little help?
