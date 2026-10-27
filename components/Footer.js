@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { SOCIAL, WHATSAPP_NUMBER_LOCAL } from "@/lib/constants";
+import { SOCIAL, WHATSAPP_NUMBER, WHATSAPP_NUMBER_LOCAL } from "@/lib/constants";
+import { FaWhatsapp, FaTiktok, FaInstagram } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -24,11 +25,51 @@ export default function Footer() {
 
         <div>
           <p className="font-semibold mb-2">Get in touch</p>
-          <ul className="space-y-1">
-            <li>WhatsApp: {WHATSAPP_NUMBER_LOCAL}</li>
-            <li>TikTok: @{SOCIAL.tiktok}</li>
-            {SOCIAL.instagram && <li>Instagram: @{SOCIAL.instagram}</li>}
-          </ul>
+        <ul className="space-y-3">
+  <li>
+    <a
+      href={`https://wa.me/${WHATSAPP_NUMBER}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 transition-colors hover:text-lilac-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lilac-deep"
+    >
+      <FaWhatsapp size={17} aria-hidden="true" />
+      <span>WhatsApp: {WHATSAPP_NUMBER_LOCAL}</span>
+    </a>
+  </li>
+
+  {SOCIAL.tiktok && (
+    <li>
+      <a
+        href={`https://www.tiktok.com/@${SOCIAL.tiktok.replace(/^@/, "")}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 transition-colors hover:text-lilac-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lilac-deep"
+      >
+        <FaTiktok size={17} aria-hidden="true" />
+        <span>
+          TikTok: @{SOCIAL.tiktok.replace(/^@/, "")}
+        </span>
+      </a>
+    </li>
+  )}
+
+  {/* {SOCIAL.instagram && (
+    <li>
+      <a
+        href={`https://www.instagram.com/${SOCIAL.instagram.replace(/^@/, "")}/`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 transition-colors hover:text-lilac-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lilac-deep"
+      >
+        <FaInstagram size={17} aria-hidden="true" />
+        <span>
+          Instagram: @{SOCIAL.instagram.replace(/^@/, "")}
+        </span>
+      </a>
+    </li>
+  )} */}
+</ul>
         </div>
       </div>
 

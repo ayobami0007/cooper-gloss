@@ -14,7 +14,7 @@ export default function CartPage() {
   const [method, setMethod] = useState("whatsapp");
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12">
+    <div className="mx-auto max-w-5xl px-4 py-12">
       <CheckoutSteps current={step} />
 
       {step === "bag" && (

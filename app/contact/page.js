@@ -4,11 +4,13 @@
 import { useState } from "react";
 import {
   WHATSAPP_NUMBER_LOCAL,
+  WHATSAPP_NUMBER,
   SOCIAL,
   CONTACT_EMAIL,
   BUSINESS_HOURS,
 } from "@/lib/constants";
 import { buildWhatsAppEnquiryLink } from "@/lib/whatsapp";
+import { FaWhatsapp, FaTiktok, FaInstagram } from "react-icons/fa";
 
 function IconCircle({ children }) {
   return (
@@ -40,7 +42,7 @@ export default function ContactPage() {
   const canSend = form.name.trim() && form.message.trim();
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-14 font-body text-ink">
+    <div className="mx-auto max-w-6xl px-4 py-14 font-body text-ink">
       <h1 className="font-display text-4xl mb-3">Contact Us</h1>
       <p className="text-ink/70 mb-8">
         We'd love to hear from you. Reach out and we'll get back to you as soon as possible.
@@ -52,16 +54,21 @@ export default function ContactPage() {
         <div>
           <h2 className="font-display text-2xl mb-6">Get In Touch</h2>
           <div className="space-y-6">
-            <div className="flex gap-4 items-start">
+            <div className="flex items-start gap-4">
               <IconCircle>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 16.5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                  <path d="M3 7l9 6 9-6" />
-                </svg>
+                <FaWhatsapp size={20} aria-hidden="true" />
               </IconCircle>
+
               <div>
-                <p className="font-medium">Phone / WhatsApp</p>
-                <p className="text-lilac-deep">{WHATSAPP_NUMBER_LOCAL}</p>
+                <p className="font-medium">WhatsApp</p>
+                <a
+                  href={`https://wa.me/${WHATSAPP_NUMBER}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lilac-deep underline-offset-4 transition-colors hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lilac-deep"
+                >
+                  {WHATSAPP_NUMBER_LOCAL}
+                </a>
               </div>
             </div>
 
@@ -99,20 +106,25 @@ export default function ContactPage() {
               </div>
             )}
 
-            <div className="flex gap-4 items-start">
-              <IconCircle>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="3" y="3" width="18" height="18" rx="4" />
-                  <circle cx="12" cy="12" r="4" />
-                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-                </svg>
-              </IconCircle>
-              <div>
-                <p className="font-medium">Social Media</p>
-                <p className="text-ink/70">TikTok: @{SOCIAL.tiktok}</p>
-                {SOCIAL.instagram && <p className="text-ink/70">Instagram: @{SOCIAL.instagram}</p>}
-              </div>
-            </div>
+          
+
+          <div className="flex items-center gap-3">
+  <IconCircle>
+    <FaTiktok size={20} />
+  </IconCircle>
+
+  <div>
+    <p className="font-medium ">TikTok</p>
+    <a
+      href={`https://www.tiktok.com/@${SOCIAL.tiktok.replace(/^@/, "")}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="font-body font-medium text-lilac-deep hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lilac-deep"
+    >
+      @{SOCIAL.tiktok.replace(/^@/, "")}
+    </a>
+  </div>
+</div>
           </div>
         </div>
 

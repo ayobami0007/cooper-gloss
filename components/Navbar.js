@@ -39,7 +39,7 @@ export default function Navbar() {
             aria-label={`Cart, ${itemCount} item${itemCount === 1 ? "" : "s"}`}
             className="relative font-body text-sm text-ink hover:text-lilac-deep transition-colors"
           >
-            Cart
+            Bag
             {itemCount > 0 && (
               <span className="absolute -top-2 -right-3 bg-lilac-deep text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 {itemCount}

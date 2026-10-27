@@ -21,3 +21,34 @@ body {
 .toast-enter {
   animation: toast-in 0.25s ease-out;
 }
+
+
+/* Hero animations  */
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.hero-animations-ready .hero-fade-up {
+  animation: hero-fade-up 700ms ease-out both;
+}
+
+.hero-animations-ready .hero-fade-up-delay {
+  animation: hero-fade-up 700ms ease-out 180ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-animations-ready .hero-fade-up,
+  .hero-animations-ready .hero-fade-up-delay {
+    animation: none;
+  }
+}

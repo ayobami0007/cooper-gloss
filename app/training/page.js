@@ -1,111 +1,264 @@
-"use client";
 
-import { useCart } from "@/lib/cart-context";
-import { TRAINING_ITEMS } from "@/lib/training";
+import Reveal from "@/components/ui/Reveal";
 import { formatNaira } from "@/lib/constants";
 import { buildWhatsAppEnquiryLink } from "@/lib/whatsapp";
 
-const CURRICULUM = [
-  "How to make different types of lip gloss",
-  "How to make clear, pigmented, glitter, and shimmer glosses",
-  "How to make color-changing lip gloss",
-  "How to make lip scrub",
-  "How to make lip balm",
-  "How to formulate moisturizing lip care products",
+const COURSES = [
+  {
+    id: "online-lipgloss",
+    name: "Lipgloss & Lipcare Formulation",
+    mode: "Online Class",
+    price: 25000,
+  },
+  {
+    id: "online-pink-lips",
+    name: "Pink Lips Cream Formulation",
+    mode: "Online Class",
+    price: 15000,
+  },
+  {
+    id: "physical-lipgloss",
+    name: "Lipgloss & Lipcare Formulation",
+    mode: "Physical Class",
+    price: 50000,
+  },
+  {
+    id: "physical-pink-lips",
+    name: "Pink Lips Cream Formulation",
+    mode: "Physical Class",
+    price: 20000,
+  },
 ];
 
-const INCLUDED = [
-  "Free trusted vendor contacts",
-  "Raw material recommendations",
+const TRAINING_BENEFITS = [
+  {
+    title: "Supplier Contacts",
+    description:
+      "Receive supplier contacts to help you source your materials.",
+  },
+  {
+    title: "Learn with Cooper Gloss",
+    description:
+      "Learn using Cooper Gloss products as part of your training experience.",
+  },
+  {
+    title: "Practical Learning",
+    description:
+      "A starter kit must be purchased for practical sessions.",
+  },
 ];
 
-export default function TrainingPage() {
-  const { addItem } = useCart();
+function CourseCard({ course }) {
+  const message = [
+    "Hi Cooper Gloss!",
+    "",
+    "I'd like to enquire about your training.",
+    `Course: ${course.name}`,
+    `Class: ${course.mode}`,
+    `Fee: ${formatNaira(course.price)}`,
+    "",
+    "Please share more details about enrolment.",
+  ].join("\n");
 
-  const enquiryLink = buildWhatsAppEnquiryLink(
-    "Hi Cooper Gloss, I'd like to know more about the lip-gloss-making training."
-  );
-
-  function handleEnroll(item) {
-    addItem(item, { qty: 1, variant: item.shade });
-  }
+  const enquiryLink = buildWhatsAppEnquiryLink(message);
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-14 font-body text-ink text-center">
-      <p className="font-display italic text-lilac-deep text-lg mb-2">
-        Gloss It. Care For It.
+    <article className="group flex h-full flex-col rounded-2xl border border-lilac-soft bg-white p-6 text-left transition-all duration-300 hover:-translate-y-1 hover:border-lilac hover:shadow-lg motion-reduce:transform-none motion-reduce:transition-none sm:p-8">
+      <span className="mb-4 inline-flex w-fit rounded-full bg-lilac-cloud px-3 py-1 font-body text-xs font-medium text-lilac-deep">
+        {course.mode}
+      </span>
+
+      <h3 className="mb-3 font-display text-xl text-ink">
+        {course.name}
+      </h3>
+
+      <p className="mb-6 font-display text-3xl text-lilac-deep">
+        {formatNaira(course.price)}
       </p>
-      <h1 className="font-display text-3xl md:text-4xl mb-3">
-        Lip-Gloss-Making Training
-      </h1>
-      <p className="text-ink/70 max-w-xl mx-auto mb-10">
-        Learn to make lip gloss and lip care products the Cooper Gloss way —
-        online from anywhere, or face-to-face in Ilorin or Malete. Enroll
-        below and we'll confirm your spot on WhatsApp.
+
+      <p className="mb-6 font-body text-sm leading-6 text-ink/70">
+        Class details coming soon
       </p>
 
-      <div className="flex flex-wrap justify-center gap-6 mb-14">
-        {TRAINING_ITEMS.map((item) => (
-          <div
-            key={item.id}
-            className="bg-white border border-lilac-soft rounded-2xl p-8 w-full sm:w-72"
-          >
-            <h2 className="font-display text-xl mb-2">
-              {item.name.replace("Cooper Gloss Training — ", "")}
-            </h2>
-            <p className="text-sm text-ink/60 mb-4">{item.shade}</p>
-            <p className="font-display text-2xl text-lilac-deep mb-6">
-              {formatNaira(item.price)}
-            </p>
-            <button
-              onClick={() => handleEnroll(item)}
-              className="w-full py-3 rounded-full bg-lilac-deep text-white font-medium hover:opacity-90 transition-opacity"
-            >
-              Enroll
-            </button>
-          </div>
-        ))}
-      </div>
-
-      {/* Curriculum */}
-      <section className="mb-14">
-        <h2 className="font-display text-2xl mb-6">What You'll Learn</h2>
-        <ul className="max-w-md mx-auto space-y-3 text-left">
-          {CURRICULUM.map((item) => (
-            <li key={item} className="flex gap-3 items-start">
-              <span className="text-lilac-deep mt-1">✓</span>
-              <span className="text-ink/80">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* What's included */}
-      <section className="mb-14">
-        <h2 className="font-display text-2xl mb-6">What's Included</h2>
-        <ul className="max-w-md mx-auto space-y-3 text-left">
-          {INCLUDED.map((item) => (
-            <li key={item} className="flex gap-3 items-start">
-              <span className="text-lilac-deep mt-1">✓</span>
-              <span className="text-ink/80">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <p className="text-sm text-ink/60 mb-2">Still have a question first?</p>
-      
-      <a  href={enquiryLink}
+      <a
+        href={enquiryLink}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-block px-6 py-3 rounded-full border border-lilac-deep text-lilac-deep font-medium hover:bg-lilac-soft/40 transition-colors"
+        className="mt-auto inline-flex w-full items-center justify-center rounded-full bg-lilac-deep px-5 py-3 font-body text-sm font-medium text-white transition-colors hover:bg-lilac-deep/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lilac-deep focus-visible:ring-offset-2"
       >
-        Ask a Quick Question on WhatsApp
+        Enquire on WhatsApp
       </a>
+    </article>
+  );
+}
 
-      <p className="text-xs text-ink/40 mt-6 italic">
-        Target audience and training duration still pending from the client.
-      </p>
-    </div>
+export default function TrainingPage() {
+  const onlineCourses = COURSES.filter(
+    (course) => course.mode === "Online Class"
+  );
+
+  const physicalCourses = COURSES.filter(
+    (course) => course.mode === "Physical Class"
+  );
+
+  return (
+    <main className="overflow-hidden font-body text-ink">
+      {/* Hero */}
+      <section className="bg-lilac-cloud px-4 py-16 text-center md:py-20">
+        <div className="mx-auto max-w-3xl">
+          <Reveal>
+            <p className="mb-3 font-display text-lg italic text-lilac-deep">
+              Gloss It. Care For It.
+            </p>
+
+            <h1 className="mb-5 font-display text-3xl leading-tight text-ink sm:text-4xl md:text-5xl">
+              Cooper Gloss Training
+            </h1>
+
+            <p className="mx-auto max-w-2xl text-sm leading-7 text-ink/70 sm:text-base">
+              Ready to start your lip-care business or improve your
+              formulation skills? Explore our online and physical
+              training options and contact us to learn more about
+              enrolment.
+            </p>
+
+            <a
+              href="#training-options"
+              className="mt-8 inline-flex rounded-full bg-lilac-deep px-7 py-3 font-medium text-white transition-colors hover:bg-lilac-deep/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lilac-deep focus-visible:ring-offset-2"
+            >
+              Explore Training
+            </a>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Online classes */}
+      <section
+        id="training-options"
+        className="mx-auto max-w-7xl scroll-mt-8 px-4 py-14 md:py-16"
+      >
+        <Reveal>
+          <div className="mb-8 text-center">
+            <p className="mb-2 text-sm font-medium uppercase tracking-widest text-lilac-deep">
+              Learn from anywhere
+            </p>
+            <h2 className="font-display text-2xl text-ink sm:text-3xl">
+              Online Class
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-ink/70">
+              Explore our online formulation training options.
+              Contact us for details about the learning arrangement
+              and enrolment.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          {onlineCourses.map((course, index) => (
+            <Reveal key={course.id} delay={index * 100}>
+              <CourseCard course={course} />
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* Physical classes */}
+      <section className="border-y border-lilac-soft bg-white px-4 py-14 md:py-16">
+        <div className="mx-auto max-w-7xl">
+          <Reveal>
+            <div className="mb-8 text-center">
+              <p className="mb-2 text-sm font-medium uppercase tracking-widest text-lilac-deep">
+                Learn in person
+              </p>
+              <h2 className="font-display text-2xl text-ink sm:text-3xl">
+                Physical Class
+              </h2>
+              <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-ink/70">
+                Prefer face-to-face training? Physical classes are
+                available in Ilorin or Malete. Contact Cooper Gloss
+                to discuss the details.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            {physicalCourses.map((course, index) => (
+              <Reveal key={course.id} delay={index * 100}>
+                <CourseCard course={course} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Training information */}
+      <section className="mx-auto max-w-7xl px-4 py-14 md:py-16">
+        <Reveal>
+          <div className="mb-8 text-center">
+            <p className="mb-2 font-display text-lg italic text-lilac-deep">
+              Before you enrol
+            </p>
+            <h2 className="font-display text-2xl text-ink sm:text-3xl">
+              What to Know
+            </h2>
+          </div>
+        </Reveal>
+
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+          {TRAINING_BENEFITS.map((benefit, index) => (
+            <Reveal key={benefit.title} delay={index * 100}>
+              <div className="h-full rounded-2xl border border-lilac-soft bg-lilac-cloud/50 p-6">
+                <span
+                  aria-hidden="true"
+                  className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-lilac-soft font-display text-lg text-lilac-deep"
+                >
+                  ✓
+                </span>
+
+                <h3 className="mb-2 font-display text-lg text-ink">
+                  {benefit.title}
+                </h3>
+
+                <p className="text-sm leading-6 text-ink/70">
+                  {benefit.description}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* Final enquiry CTA */}
+      <section className="bg-lilac-cloud px-4 py-14 text-center md:py-16">
+        <Reveal>
+          <div className="mx-auto max-w-2xl">
+            <h2 className="mb-4 font-display text-2xl text-ink sm:text-3xl">
+              Ready to Get Started?
+            </h2>
+
+            <p className="mb-7 text-sm leading-7 text-ink/70 sm:text-base">
+              Have questions about a course, practical sessions, or
+              enrolment? Send Cooper Gloss a message on WhatsApp.
+            </p>
+
+            <a
+              href={buildWhatsAppEnquiryLink(
+                "Hi Cooper Gloss! I'd like to know more about your lip-gloss and lip-care training options and how to enrol."
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex rounded-full bg-lilac-deep px-7 py-3 font-medium text-white transition-colors hover:bg-lilac-deep/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lilac-deep focus-visible:ring-offset-2"
+            >
+              Ask Us on WhatsApp
+            </a>
+
+            <p className="mt-5 text-xs leading-5 text-ink/50">
+              A starter kit must be purchased for practical sessions.
+              Contact us for further training details.
+            </p>
+          </div>
+        </Reveal>
+      </section>
+    </main>
   );
 }

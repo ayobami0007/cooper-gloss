@@ -12,7 +12,7 @@ export default function ProductPage({ params }) {
   if (!product) return notFound();
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12 grid md:grid-cols-2 gap-10">
+    <div className="mx-auto max-w-6xl px-4 py-12 grid md:grid-cols-2 gap-10">
       <div className="aspect-square relative bg-lilac-cloud rounded-2xl overflow-hidden">
         <Image
           src={product.images?.[0] ?? "/products/placeholder.svg"}
