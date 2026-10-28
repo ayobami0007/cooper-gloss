@@ -3,34 +3,15 @@ import Reveal from "@/components/ui/Reveal";
 import Link from "next/link";
 import { formatNaira } from "@/lib/constants";
 import { buildWhatsAppEnquiryLink } from "@/lib/whatsapp";
+import { TRAINING_ITEMS } from "@/lib/training";
 
+const onlineCourses = TRAINING_ITEMS.filter(
+  (item) => item.mode === "Online"
+);
 
-const COURSES = [
-  {
-    id: "online-lipgloss",
-    name: "Lipgloss & Lipcare Formulation",
-    mode: "Online Class",
-    price: 25000,
-  },
-  {
-    id: "online-pink-lips",
-    name: "Pink Lips Cream Formulation",
-    mode: "Online Class",
-    price: 15000,
-  },
-  {
-    id: "physical-lipgloss",
-    name: "Lipgloss & Lipcare Formulation",
-    mode: "Physical Class",
-    price: 50000,
-  },
-  {
-    id: "physical-pink-lips",
-    name: "Pink Lips Cream Formulation",
-    mode: "Physical Class",
-    price: 20000,
-  },
-];
+const physicalCourses = TRAINING_ITEMS.filter(
+  (item) => item.mode === "Physical"
+);
 
 const TRAINING_BENEFITS = [
   {
@@ -46,28 +27,15 @@ const TRAINING_BENEFITS = [
   {
     title: "Practical Learning",
     description:
-      "A starter kit must be purchased for practical sessions.",
+      "A starter kit must be purchased for practical sessions. Contact Cooper Gloss for details.",
   },
 ];
 
 function CourseCard({ course }) {
-  const message = [
-    "Hi Cooper Gloss!",
-    "",
-    "I'd like to enquire about your training.",
-    `Course: ${course.name}`,
-    `Class: ${course.mode}`,
-    `Fee: ${formatNaira(course.price)}`,
-    "",
-    "Please share more details about enrolment.",
-  ].join("\n");
-
-  const enquiryLink = buildWhatsAppEnquiryLink(message);
-
   return (
     <article className="group flex h-full flex-col rounded-2xl border border-lilac-soft bg-white p-6 text-left transition-all duration-300 hover:-translate-y-1 hover:border-lilac hover:shadow-lg motion-reduce:transform-none motion-reduce:transition-none sm:p-8">
       <span className="mb-4 inline-flex w-fit rounded-full bg-lilac-cloud px-3 py-1 font-body text-xs font-medium text-lilac-deep">
-        {course.mode}
+        {course.mode} Class
       </span>
 
       <h3 className="mb-3 font-display text-xl text-ink">
@@ -79,31 +47,28 @@ function CourseCard({ course }) {
       </p>
 
       <p className="mb-6 font-body text-sm leading-6 text-ink/70">
-        Class details coming soon
+        {course.description}
       </p>
 
-    <Link
-  href={`/training/register?course=${course.id}`}
-  className="mt-auto inline-flex w-full items-center justify-center rounded-full bg-lilac-deep px-5 py-3 font-body text-sm font-medium text-white transition-colors hover:bg-lilac-deep/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lilac-deep focus-visible:ring-offset-2"
->
-  Register Now
-</Link>
+      <p className="mb-6 font-body text-xs leading-5 text-ink/60">
+        {course.mode === "Physical"
+          ? "Available in Ilorin or Malete. Confirm venue and practical arrangements before enrolment."
+          : "Contact Cooper Gloss to confirm the online learning arrangements."}
+      </p>
+
+      <Link
+        href={`/training/register?course=${course.id}`}
+        className="mt-auto inline-flex w-full items-center justify-center rounded-full bg-lilac-deep px-5 py-3 font-body text-sm font-medium text-white transition-colors hover:bg-lilac-deep/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lilac-deep focus-visible:ring-offset-2"
+      >
+        Register Now
+      </Link>
     </article>
   );
 }
 
 export default function TrainingPage() {
-  const onlineCourses = COURSES.filter(
-    (course) => course.mode === "Online Class"
-  );
-
-  const physicalCourses = COURSES.filter(
-    (course) => course.mode === "Physical Class"
-  );
-
   return (
     <main className="overflow-hidden font-body text-ink">
-      {/* Hero */}
       <section className="bg-lilac-cloud px-4 py-16 text-center md:py-20">
         <div className="mx-auto max-w-3xl">
           <Reveal>
@@ -118,8 +83,7 @@ export default function TrainingPage() {
             <p className="mx-auto max-w-2xl text-sm leading-7 text-ink/70 sm:text-base">
               Ready to start your lip-care business or improve your
               formulation skills? Explore our online and physical
-              training options and contact us to learn more about
-              enrolment.
+              training options and enquire about enrolment.
             </p>
 
             <a
@@ -132,7 +96,6 @@ export default function TrainingPage() {
         </div>
       </section>
 
-      {/* Online classes */}
       <section
         id="training-options"
         className="mx-auto max-w-7xl scroll-mt-8 px-4 py-14 md:py-16"
@@ -143,12 +106,12 @@ export default function TrainingPage() {
               Learn from anywhere
             </p>
             <h2 className="font-display text-2xl text-ink sm:text-3xl">
-              Online Class
+              Online Classes
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-ink/70">
               Explore our online formulation training options.
-              Contact us for details about the learning arrangement
-              and enrolment.
+              Contact us to confirm the learning arrangements and
+              enrolment details.
             </p>
           </div>
         </Reveal>
@@ -162,7 +125,6 @@ export default function TrainingPage() {
         </div>
       </section>
 
-      {/* Physical classes */}
       <section className="border-y border-lilac-soft bg-white px-4 py-14 md:py-16">
         <div className="mx-auto max-w-7xl">
           <Reveal>
@@ -171,12 +133,12 @@ export default function TrainingPage() {
                 Learn in person
               </p>
               <h2 className="font-display text-2xl text-ink sm:text-3xl">
-                Physical Class
+                Physical Classes
               </h2>
               <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-ink/70">
-                Prefer face-to-face training? Physical classes are
-                available in Ilorin or Malete. Contact Cooper Gloss
-                to discuss the details.
+                Prefer face-to-face training? Classes are available
+                in Ilorin or Malete. Contact Cooper Gloss to confirm
+                venue and practical arrangements.
               </p>
             </div>
           </Reveal>
@@ -191,7 +153,6 @@ export default function TrainingPage() {
         </div>
       </section>
 
-      {/* Training information */}
       <section className="mx-auto max-w-7xl px-4 py-14 md:py-16">
         <Reveal>
           <div className="mb-8 text-center">
@@ -228,7 +189,6 @@ export default function TrainingPage() {
         </div>
       </section>
 
-      {/* Final enquiry CTA */}
       <section className="bg-lilac-cloud px-4 py-14 text-center md:py-16">
         <Reveal>
           <div className="mx-auto max-w-2xl">
@@ -243,7 +203,7 @@ export default function TrainingPage() {
 
             <a
               href={buildWhatsAppEnquiryLink(
-                "Hi Cooper Gloss! I'd like to know more about your lip-gloss and lip-care training options and how to enrol."
+                "Hi Cooper Gloss! I'd like to know more about your training options and how to enrol."
               )}
               target="_blank"
               rel="noopener noreferrer"
@@ -251,11 +211,6 @@ export default function TrainingPage() {
             >
               Ask Us on WhatsApp
             </a>
-
-            <p className="mt-5 text-xs leading-5 text-ink/50">
-              A starter kit must be purchased for practical sessions.
-              Contact us for further training details.
-            </p>
           </div>
         </Reveal>
       </section>
